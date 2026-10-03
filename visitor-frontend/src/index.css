@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  body {
+    @apply min-h-screen;
+    background: #778da9;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center px-4 py-2
+    rounded-lg bg-gradient-to-r from-[#70587C] to-[#C8B8DB] text-white
+    shadow-lg hover:opacity-90 transform hover:scale-[1.02]
+    transition-all duration-300;
+  }
+  .btn-secondary {
+    @apply px-6 py-2.5 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg;
+    background-color: #778da9;
+    color: #415a77;
+  }
+  .card {
+    background-color: rgba(224, 225, 221, 0.9);
+    @apply backdrop-blur-sm rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 p-6;
+    border: 3px solid rgba(119, 141, 169, 0.3);
+  }
+  .input-primary {
+    @apply block w-full pl-10 pr-3 py-3 border border-[#C8B8DB] text-[#70587C] rounded-lg
+    bg-white/70 backdrop-blur-sm placeholder-[#C8B8DB]
+    focus:outline-none focus:ring-2 focus:ring-[#70587C] focus:border-transparent
+    transition-all duration-300;
+  }
+  .title {
+    @apply text-3xl font-bold bg-gradient-to-r from-[#34587f] to-[#C8B834] bg-clip-text text-transparent mb-8 animate-slide-up;
+  }
+  .heading-1 {
+    @apply text-4xl font-display font-bold;
+    background: linear-gradient(135deg, #415a77 0%, #778da9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .heading-2 {
+    @apply text-3xl font-display font-semibold;
+    background: linear-gradient(135deg, #415a77 0%, #778da9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-link {
+    @apply px-4 py-2 rounded-lg transition-all duration-300;
+    color: #415a77;
+  }
+  .nav-link:hover {
+    background-color: rgba(119, 141, 169, 0.2);
+  }
+  .nav-link-active {
+    background-color: #778da9;
+    color: #415a77;
+  }
+  .stats-card {
+    background-color: rgba(224, 225, 221, 0.9);
+    @apply backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 
+           hover:transform hover:-translate-y-1 overflow-hidden;
+    border: 1px solid rgba(119, 141, 169, 0.3);
+  }
+  .stats-icon {
+    @apply flex-shrink-0 rounded-lg p-4 shadow-lg transform transition-transform group-hover:scale-110 duration-500;
+    background: linear-gradient(135deg, #415a77 0%, #778da9 100%);
+    color: #e0e1dd;
+  }
+  .stats-value {
+    @apply text-3xl font-bold;
+    background: linear-gradient(135deg, #415a77 0%, #778da9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .table-row {
+    @apply transition-colors duration-300;
+  }
+  .table-row:hover {
+    background-color: rgba(119, 141, 169, 0.1);
+  }
+}
+
+/* Animation keyframes et classes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
