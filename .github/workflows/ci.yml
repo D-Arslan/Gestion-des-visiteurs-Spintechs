@@ -1,0 +1,65 @@
+# Build checks for the four components. This proves that each one compiles (and that the
+# Spring context starts); it does not test behaviour. See README "Limits".
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: visitor-backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      # One test: the Spring context loads with the default `dev` profile (H2 file, no secret needed).
+      - run: mvn -B test
+
+  mobile:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.8"
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      # Static analysis of the app code only. test/ is excluded on purpose: widget_test.dart
+      # does not compile (wrong import, missing method), as in the original repository.
+      # Infos and warnings are reported but not fatal; errors fail the job.
+      # No `flutter build`: the 96 MB model is a Release asset, not in the repository.
+      - run: flutter analyze lib main.dart --no-fatal-warnings --no-fatal-infos
+
+  web:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [visitor-frontend, satisfaction]
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: ${{ matrix.app }}/package-lock.json
+      - run: npm ci
+      - run: npm run build

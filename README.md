@@ -6,6 +6,10 @@ MRZ of ID documents **on the phone** (ML Kit), a Spring Boot API, a React admin 
 React satisfaction kiosk keyed on the visitor's badge. A TensorFlow Lite document classifier
 ships with the app but is not wired to the UI in this snapshot.
 
+[![ci](https://github.com/D-Arslan/Gestion-des-visiteurs-Spintechs/actions/workflows/ci.yml/badge.svg)](https://github.com/D-Arslan/Gestion-des-visiteurs-Spintechs/actions/workflows/ci.yml)
+
+CI checks that the four components build; test coverage is minimal (see Limits).
+
 The four original repositories, gathered as they stood at the end of the project (see
 [Provenance](#provenance)). A working prototype, not a product.
 
@@ -136,6 +140,7 @@ Gestion-des-visiteurs-Spintechs/
 ├── satisfaction/                # React kiosk: badge scan, then 1-5 rating
 ├── docs/                        # DESIGN.md, architecture.svg, images/
 ├── scripts/export_diagram.py    # README Mermaid → docs/architecture.svg
+├── .github/workflows/ci.yml     # build checks: mvn test, flutter analyze, npm run build ×2
 └── .env.example
 ```
 
@@ -171,7 +176,7 @@ Details, and the reasoning behind each: [docs/DESIGN.md](docs/DESIGN.md).
 - **Open endpoints.** `SecurityConfig` permits `/api/visits/{id}` and `/api/visits/*` for every
   HTTP method without a token: anyone who can reach the API can read, modify or delete a visit.
   Not fixed in this snapshot; the fix is to open only the two kiosk calls, by method.
-- **Thin test coverage, no CI.** One backend test (context loads); `mobile/test/widget_test.dart`
+- **Thin test coverage.** One backend test (context loads); `mobile/test/widget_test.dart`
   does not compile (it was already broken in the original repository); no tests for the two
   React apps.
 - **Prototype leftovers**: a debug button, a hard-coded kiosk URL, an incomplete Maven wrapper;

@@ -147,7 +147,9 @@ through the app rather than in the notebook.
 
 - Tests: one Spring test (context loads, `dev` profile). `mobile/test/widget_test.dart` does not
   compile (wrong import path, calls a `getText` method that `_HomePageState` does not have); it
-  was already broken in the original repository. No tests for the two React apps. No CI.
+  was already broken in the original repository. No tests for the two React apps. CI
+  (`.github/workflows/ci.yml`) only checks that the four components build: `mvn test`,
+  `flutter analyze lib main.dart` (test/ excluded), `npm run build` for both React apps.
 - `flutter analyze` on `lib/` reports 0 errors and 89 infos and warnings (unused fields and
   imports, `print`, `BuildContext` across async gaps), including the unused classifier code.
 - `mobile/main.dart` at the root of the Flutter project is an older copy of `lib/main.dart`;
