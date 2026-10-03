@@ -22,6 +22,14 @@ the badge on the way out.
 
 *Admin dashboard (screenshot from the thesis, test data with fictitious names).*
 
+<p>
+  <img src="docs/images/mobile_visitors.jpg" alt="Mobile app: visitor list with badge status" height="300">
+  <img src="docs/images/kiosk.png" alt="Satisfaction kiosk: scan your badge to rate the visit" height="300">
+</p>
+
+*Mobile visitor list, the four team members used as test visitors (left), and the satisfaction
+kiosk at the exit (right). Screenshots from the thesis.*
+
 | item | value | source |
 |---|---|---|
 | document type in the visit record | read from the MRZ prefix (`IDDZA`, `DLDZA`, `P<DZA`) | `mobile/lib/pages/scan_page.dart` |
